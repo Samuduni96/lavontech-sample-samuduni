@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
-import {Header} from "./components/Header";
+import { Header } from "./components/Header";
 import Dashboard from "./components/Dashboard";
 import { CssBaseline } from "@mui/material";
 import Products from "./components/Products";

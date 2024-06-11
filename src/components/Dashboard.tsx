@@ -40,9 +40,9 @@ const Dashboard: React.FC<DashboardProps> = ({ drawerOpen }) => {
         </button>
       </div>
 
-      <div className="flex gap-5">
-        <div className="w-1/3">
-          <div className="grid grid-cols-2 gap-5">
+      <div className="lg:flex gap-5">
+        <div className="w-full lg:w-1/3">
+          <div className="grid grid-cols-1 lg:grid-cols-2  gap-5">
             <Box
               className="flex flex-col p-4 rounded-lg h-40 justify-between"
               sx={{ bgcolor: "primary.main" }}
@@ -58,7 +58,7 @@ const Dashboard: React.FC<DashboardProps> = ({ drawerOpen }) => {
                 <PersonAddIcon className="text-darkYellow" />
               </div>
               <div className="flex justify-between">
-                <div className="text-darkYellow mr-6">+21%</div>
+                <div className="text-darkYellow mr-6 italic">+21%</div>
                 <ListItemText
                   sx={{
                     color: "secondary.main",
@@ -84,7 +84,7 @@ const Dashboard: React.FC<DashboardProps> = ({ drawerOpen }) => {
                 <PointOfSaleOutlinedIcon className="text-darkYellow" />
               </div>
               <div className="flex justify-between">
-                <div className="text-darkYellow mr-6">+21%</div>
+                <div className="text-darkYellow mr-6 italic">+21%</div>
                 <ListItemText
                   sx={{
                     color: "secondary.main",
@@ -110,7 +110,7 @@ const Dashboard: React.FC<DashboardProps> = ({ drawerOpen }) => {
                 <PointOfSaleOutlinedIcon className="text-darkYellow" />
               </div>
               <div className="flex justify-between">
-                <div className="text-darkYellow mr-7">+5%</div>
+                <div className="text-darkYellow mr-7 italic">+5%</div>
                 <ListItemText
                   sx={{
                     color: "secondary.main",
@@ -136,7 +136,7 @@ const Dashboard: React.FC<DashboardProps> = ({ drawerOpen }) => {
                 <PointOfSaleOutlinedIcon className="text-darkYellow" />
               </div>
               <div className="flex justify-between">
-                <div className="text-darkYellow mr-6">+43%</div>
+                <div className="text-darkYellow mr-6 italic">+43%</div>
                 <ListItemText
                   sx={{
                     color: "secondary.main",
@@ -148,7 +148,10 @@ const Dashboard: React.FC<DashboardProps> = ({ drawerOpen }) => {
             </Box>
           </div>
         </div>
-        <Box className="w-2/3 rounded-lg px-4" sx={{ bgcolor: "primary.main" }}>
+        <Box
+          className="lg:w-2/3 h-40 lg:h-auto rounded-lg px-4"
+          sx={{ bgcolor: "primary.main" }}
+        >
           <div className="mt-8 text-gray-500">Loading data...</div>
         </Box>
       </div>
