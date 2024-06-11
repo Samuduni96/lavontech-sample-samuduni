@@ -22,7 +22,7 @@ import TrendingUpOutlinedIcon from "@mui/icons-material/TrendingUpOutlined";
 import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
 
 interface SideDrawerProps {
-  toggleDrawer: (newOpen: boolean) => () => void;
+  toggleDrawer: () => void;
   open: boolean;
 }
 
@@ -56,12 +56,10 @@ export default function SideDrawer({ toggleDrawer, open }: SideDrawerProps) {
     <TrendingUpOutlinedIcon />,
   ];
 
+  const drawerWidth = 250;
+
   const DrawerList = (
-    <Box
-      className="bg-darkBlue flex-col"
-      sx={{ width: 250 }}
-      role="presentation"
-    >
+    <Box className="bg-[#21295c] flex-col" role="presentation" display="flex">
       <div className="flex p-4 text-2xl font-bold text-darkYellow">
         LAVONTECH
       </div>
@@ -75,6 +73,9 @@ export default function SideDrawer({ toggleDrawer, open }: SideDrawerProps) {
             <ListItemButton
               sx={{
                 backgroundColor: selectedItem === text ? "#FFE3A3" : "inherit",
+                "&:hover": {
+                  backgroundColor: "#ffffff14",
+                },
               }}
             >
               <ListItemIcon
@@ -84,9 +85,9 @@ export default function SideDrawer({ toggleDrawer, open }: SideDrawerProps) {
               </ListItemIcon>
               <ListItemText
                 primary={text}
-                className={
-                  selectedItem === text ? "text-black" : "text-lighterYellow"
-                }
+                sx={{
+                  color: selectedItem === text ? "lblack" : "lightYellow",
+                }}
               />
               {selectedItem === text && <KeyboardArrowRightOutlinedIcon />}
             </ListItemButton>
@@ -108,6 +109,9 @@ export default function SideDrawer({ toggleDrawer, open }: SideDrawerProps) {
                 sx={{
                   backgroundColor:
                     selectedItem === text ? "#FFE3A3" : "inherit",
+                  "&:hover": {
+                    backgroundColor: "#ffffff14",
+                  },
                 }}
               >
                 <ListItemIcon
@@ -140,6 +144,9 @@ export default function SideDrawer({ toggleDrawer, open }: SideDrawerProps) {
             <ListItemButton
               sx={{
                 backgroundColor: selectedItem === text ? "#FFE3A3" : "inherit",
+                "&:hover": {
+                  backgroundColor: "#ffffff14",
+                },
               }}
             >
               <ListItemIcon
@@ -169,6 +176,9 @@ export default function SideDrawer({ toggleDrawer, open }: SideDrawerProps) {
             <ListItemButton
               sx={{
                 backgroundColor: selectedItem === text ? "#FFE3A3" : "inherit",
+                "&:hover": {
+                  backgroundColor: "#ffffff14",
+                },
               }}
             >
               <ListItemIcon
@@ -191,7 +201,17 @@ export default function SideDrawer({ toggleDrawer, open }: SideDrawerProps) {
   );
 
   return (
-    <Drawer open={open} onClose={toggleDrawer(false)}>
+    <Drawer
+      open={open}
+      sx={{
+        width: drawerWidth,
+        flexShrink: 0,
+        "& .MuiDrawer-paper": {
+          width: drawerWidth,
+        },
+      }}
+      variant="persistent"
+    >
       {DrawerList}
     </Drawer>
   );

@@ -1,21 +1,10 @@
-import Button from "@mui/material/Button";
 import React from "react";
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import SideDrawer from "./SideDrawer";
 
 const Dashboard: React.FC = () => {
-  const [drawerOpen, setDrawerOpen] = React.useState<boolean>(true);
-
-  const toggleDrawer = (newOpen: boolean) => () => {
-    setDrawerOpen(newOpen);
-  };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <Button onClick={toggleDrawer(true)} className="absolute top-4 left-4">
-        <MenuOutlinedIcon />
-      </Button>
-      <SideDrawer toggleDrawer={toggleDrawer} open={drawerOpen} />
+    <div className="flex flex-col items-center justify-center h-screen bg-darkBlue">
+
       <header className="text-3xl font-bold mb-8">
         DASHBOARD
         <p className="text-lg font-normal">Welcome to your dashboard</p>
