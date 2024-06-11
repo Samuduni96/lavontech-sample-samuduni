@@ -34,7 +34,7 @@ const Dashboard: React.FC<DashboardProps> = ({ drawerOpen }) => {
           </div>
         </div>
 
-        <button className="my-3 px-4 py-2 text-sm bg-red-500 text-white rounded-sm hover:bg-[#ffffff14]">
+        <button className="my-3 px-4 py-2 text-sm bg-red-500 rounded-sm hover:bg-[#ffffff14]">
           <GetAppOutlinedIcon className="mx-2" />
           DOWNLOAD REPORTS
         </button>

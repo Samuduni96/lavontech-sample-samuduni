@@ -3,11 +3,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
@@ -19,7 +14,7 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import PointOfSaleOutlinedIcon from "@mui/icons-material/PointOfSaleOutlined";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import TrendingUpOutlinedIcon from "@mui/icons-material/TrendingUpOutlined";
-import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
+import DrawerSection from "./DrawerSection";
 
 interface SideDrawerProps {
   toggleDrawer: () => void;
@@ -35,181 +30,42 @@ export default function SideDrawer({ toggleDrawer, open }: SideDrawerProps) {
     navigate(path);
   };
 
-  const dashboardIcon = [<HomeOutlinedIcon />];
-
-  const clientIcons = [
-    <ShoppingCartOutlinedIcon />,
-    <GroupsOutlinedIcon />,
-    <ReceiptLongOutlinedIcon />,
-    <PublicOutlinedIcon />,
-  ];
-
-  const salesIcons = [
-    <PointOfSaleOutlinedIcon />,
-    <TodayOutlinedIcon />,
-    <CalendarMonthOutlinedIcon />,
-    <PieChartOutlineOutlinedIcon />,
-  ];
-
-  const managementIcons = [
-    <AdminPanelSettingsOutlinedIcon />,
-    <TrendingUpOutlinedIcon />,
-  ];
-
   const drawerWidth = 250;
 
-  const DrawerList = (
-    <Box
-      className="bg-[#21295c] light:bg-white flex-col"
-      role="presentation"
-      display="flex"
-      sx={{ bgcolor: "primary.main", color: "text.primary" }}
-    >
-      <div className="flex p-4 text-2xl font-bold text-darkYellow">
-        LAVONTECH
-      </div>
-      <List>
-        {["Dashboard"].map((text, index) => (
-          <ListItem
-            key={text}
-            disablePadding
-            onClick={() => handleListItemClick(text, "/dashboard")}
-          >
-            <ListItemButton
-              sx={{
-                backgroundColor: selectedItem === text ? "#cca752" : "inherit",
-                "&:hover": {
-                  backgroundColor: "#ffffff14",
-                },
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  color: selectedItem === text ? "black" : "secondary.main",
-                }}
-              >
-                {dashboardIcon[index]}
-              </ListItemIcon>
-              <ListItemText
-                primary={text}
-                sx={{
-                  color: selectedItem === text ? "black" : "secondary.main",
-                }}
-              />
-              {selectedItem === text && <KeyboardArrowRightOutlinedIcon />}
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <div className="p-4 text-[#cca752]">Client Facing</div>
-      <List>
-        {["Products", "Customers", "Transactions", "Geogrophy"].map(
-          (text, index) => (
-            <ListItem
-              key={text}
-              disablePadding
-              onClick={() =>
-                handleListItemClick(text, `/${text.toLowerCase()}`)
-              }
-            >
-              <ListItemButton
-                sx={{
-                  backgroundColor:
-                    selectedItem === text ? "#cca752" : "inherit",
-                  "&:hover": {
-                    backgroundColor: "#ffffff14",
-                  },
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    color: selectedItem === text ? "black" : "secondary.main",
-                  }}
-                >
-                  {clientIcons[index]}
-                </ListItemIcon>
-                <ListItemText
-                  primary={text}
-                  sx={{
-                    color: selectedItem === text ? "black" : "secondary.main",
-                  }}
-                />
-                {selectedItem === text && <KeyboardArrowRightOutlinedIcon />}
-              </ListItemButton>
-            </ListItem>
-          )
-        )}
-      </List>
-      <div className="p-4 text-[#cca752]">Sales</div>
-      <List>
-        {["Overview", "Daily", "Monthly", "Breakdown"].map((text, index) => (
-          <ListItem
-            key={text}
-            disablePadding
-            onClick={() => handleListItemClick(text, `/${text.toLowerCase()}`)}
-          >
-            <ListItemButton
-              sx={{
-                backgroundColor: selectedItem === text ? "#cca752" : "inherit",
-                "&:hover": {
-                  backgroundColor: "#ffffff14",
-                },
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  color: selectedItem === text ? "black" : "secondary.main",
-                }}
-              >
-                {salesIcons[index]}
-              </ListItemIcon>
-              <ListItemText
-                primary={text}
-                sx={{
-                  color: selectedItem === text ? "black" : "secondary.main",
-                }}
-              />
-              {selectedItem === text && <KeyboardArrowRightOutlinedIcon />}
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <div className="p-4 text-[#cca752]">Management</div>
-      <List>
-        {["Admin", "Performance"].map((text, index) => (
-          <ListItem
-            key={text}
-            disablePadding
-            onClick={() => handleListItemClick(text, `/${text.toLowerCase()}`)}
-          >
-            <ListItemButton
-              sx={{
-                backgroundColor: selectedItem === text ? "#cca752" : "inherit",
-                "&:hover": {
-                  backgroundColor: "#ffffff14",
-                },
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  color: selectedItem === text ? "black" : "secondary.main",
-                }}
-              >
-                {managementIcons[index]}
-              </ListItemIcon>
-              <ListItemText
-                primary={text}
-                sx={{
-                  color: selectedItem === text ? "black" : "secondary.main",
-                }}
-              />
-              {selectedItem === text && <KeyboardArrowRightOutlinedIcon />}
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
+  const dashboardItems = [
+    { text: "Dashboard", icon: <HomeOutlinedIcon />, path: "/dashboard" },
+  ];
+
+  const clientItems = [
+    { text: "Products", icon: <ShoppingCartOutlinedIcon />, path: "/products" },
+    { text: "Customers", icon: <GroupsOutlinedIcon />, path: "/customers" },
+    {
+      text: "Transactions",
+      icon: <ReceiptLongOutlinedIcon />,
+      path: "/transactions",
+    },
+    { text: "Geogrophy", icon: <PublicOutlinedIcon />, path: "/geogrophy" },
+  ];
+
+  const salesItems = [
+    { text: "Overview", icon: <PointOfSaleOutlinedIcon />, path: "/overview" },
+    { text: "Daily", icon: <TodayOutlinedIcon />, path: "/daily" },
+    { text: "Monthly", icon: <CalendarMonthOutlinedIcon />, path: "/monthly" },
+    {
+      text: "Breakdown",
+      icon: <PieChartOutlineOutlinedIcon />,
+      path: "/breakdown",
+    },
+  ];
+
+  const managementItems = [
+    { text: "Admin", icon: <AdminPanelSettingsOutlinedIcon />, path: "/admin" },
+    {
+      text: "Performance",
+      icon: <TrendingUpOutlinedIcon />,
+      path: "/performance",
+    },
+  ];
 
   return (
     <Drawer
@@ -223,7 +79,40 @@ export default function SideDrawer({ toggleDrawer, open }: SideDrawerProps) {
       }}
       variant="persistent"
     >
-      {DrawerList}
+      <Box
+        className="bg-[#21295c] light:bg-white flex-col"
+        role="presentation"
+        display="flex"
+        sx={{ bgcolor: "primary.main", color: "text.primary" }}
+      >
+        <div className="flex p-4 text-2xl font-bold text-darkYellow">
+          LAVONTECH
+        </div>
+        <DrawerSection
+          title=""
+          items={dashboardItems}
+          selectedItem={selectedItem}
+          onItemClick={handleListItemClick}
+        />
+        <DrawerSection
+          title="Client Facing"
+          items={clientItems}
+          selectedItem={selectedItem}
+          onItemClick={handleListItemClick}
+        />
+        <DrawerSection
+          title="Sales"
+          items={salesItems}
+          selectedItem={selectedItem}
+          onItemClick={handleListItemClick}
+        />
+        <DrawerSection
+          title="Management"
+          items={managementItems}
+          selectedItem={selectedItem}
+          onItemClick={handleListItemClick}
+        />
+      </Box>
     </Drawer>
   );
 }
