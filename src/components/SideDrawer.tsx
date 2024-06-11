@@ -59,7 +59,12 @@ export default function SideDrawer({ toggleDrawer, open }: SideDrawerProps) {
   const drawerWidth = 250;
 
   const DrawerList = (
-    <Box className="bg-[#21295c] flex-col" role="presentation" display="flex">
+    <Box
+      className="bg-[#21295c] light:bg-white flex-col"
+      role="presentation"
+      display="flex"
+      sx={{ bgcolor: "primary.main", color: "text.primary" }}
+    >
       <div className="flex p-4 text-2xl font-bold text-darkYellow">
         LAVONTECH
       </div>
@@ -72,21 +77,23 @@ export default function SideDrawer({ toggleDrawer, open }: SideDrawerProps) {
           >
             <ListItemButton
               sx={{
-                backgroundColor: selectedItem === text ? "#FFE3A3" : "inherit",
+                backgroundColor: selectedItem === text ? "#cca752" : "inherit",
                 "&:hover": {
                   backgroundColor: "#ffffff14",
                 },
               }}
             >
               <ListItemIcon
-                sx={{ color: selectedItem === text ? "black" : "lightYellow" }}
+                sx={{
+                  color: selectedItem === text ? "black" : "secondary.main",
+                }}
               >
                 {dashboardIcon[index]}
               </ListItemIcon>
               <ListItemText
                 primary={text}
                 sx={{
-                  color: selectedItem === text ? "lblack" : "lightYellow",
+                  color: selectedItem === text ? "black" : "secondary.main",
                 }}
               />
               {selectedItem === text && <KeyboardArrowRightOutlinedIcon />}
@@ -94,7 +101,7 @@ export default function SideDrawer({ toggleDrawer, open }: SideDrawerProps) {
           </ListItem>
         ))}
       </List>
-      <div className="p-4 text-lightYellow">Client Facing</div>
+      <div className="p-4 text-[#cca752]">Client Facing</div>
       <List>
         {["Products", "Customers", "Transactions", "Geogrophy"].map(
           (text, index) => (
@@ -108,7 +115,7 @@ export default function SideDrawer({ toggleDrawer, open }: SideDrawerProps) {
               <ListItemButton
                 sx={{
                   backgroundColor:
-                    selectedItem === text ? "#FFE3A3" : "inherit",
+                    selectedItem === text ? "#cca752" : "inherit",
                   "&:hover": {
                     backgroundColor: "#ffffff14",
                   },
@@ -116,16 +123,16 @@ export default function SideDrawer({ toggleDrawer, open }: SideDrawerProps) {
               >
                 <ListItemIcon
                   sx={{
-                    color: selectedItem === text ? "black" : "lightYellow",
+                    color: selectedItem === text ? "black" : "secondary.main",
                   }}
                 >
                   {clientIcons[index]}
                 </ListItemIcon>
                 <ListItemText
                   primary={text}
-                  className={
-                    selectedItem === text ? "text-black" : "text-lighterYellow"
-                  }
+                  sx={{
+                    color: selectedItem === text ? "black" : "secondary.main",
+                  }}
                 />
                 {selectedItem === text && <KeyboardArrowRightOutlinedIcon />}
               </ListItemButton>
@@ -133,7 +140,7 @@ export default function SideDrawer({ toggleDrawer, open }: SideDrawerProps) {
           )
         )}
       </List>
-      <div className="p-4 text-lightYellow">Sales</div>
+      <div className="p-4 text-[#cca752]">Sales</div>
       <List>
         {["Overview", "Daily", "Monthly", "Breakdown"].map((text, index) => (
           <ListItem
@@ -143,29 +150,31 @@ export default function SideDrawer({ toggleDrawer, open }: SideDrawerProps) {
           >
             <ListItemButton
               sx={{
-                backgroundColor: selectedItem === text ? "#FFE3A3" : "inherit",
+                backgroundColor: selectedItem === text ? "#cca752" : "inherit",
                 "&:hover": {
                   backgroundColor: "#ffffff14",
                 },
               }}
             >
               <ListItemIcon
-                sx={{ color: selectedItem === text ? "black" : "lightYellow" }}
+                sx={{
+                  color: selectedItem === text ? "black" : "secondary.main",
+                }}
               >
                 {salesIcons[index]}
               </ListItemIcon>
               <ListItemText
                 primary={text}
-                className={
-                  selectedItem === text ? "text-black" : "text-lighterYellow"
-                }
+                sx={{
+                  color: selectedItem === text ? "black" : "secondary.main",
+                }}
               />
               {selectedItem === text && <KeyboardArrowRightOutlinedIcon />}
             </ListItemButton>
           </ListItem>
         ))}
       </List>
-      <div className="p-4 text-lightYellow">Management</div>
+      <div className="p-4 text-[#cca752]">Management</div>
       <List>
         {["Admin", "Performance"].map((text, index) => (
           <ListItem
@@ -175,22 +184,24 @@ export default function SideDrawer({ toggleDrawer, open }: SideDrawerProps) {
           >
             <ListItemButton
               sx={{
-                backgroundColor: selectedItem === text ? "#FFE3A3" : "inherit",
+                backgroundColor: selectedItem === text ? "#cca752" : "inherit",
                 "&:hover": {
                   backgroundColor: "#ffffff14",
                 },
               }}
             >
               <ListItemIcon
-                sx={{ color: selectedItem === text ? "black" : "lightYellow" }}
+                sx={{
+                  color: selectedItem === text ? "black" : "secondary.main",
+                }}
               >
                 {managementIcons[index]}
               </ListItemIcon>
               <ListItemText
                 primary={text}
-                className={
-                  selectedItem === text ? "text-black" : "text-lighterYellow"
-                }
+                sx={{
+                  color: selectedItem === text ? "black" : "secondary.main",
+                }}
               />
               {selectedItem === text && <KeyboardArrowRightOutlinedIcon />}
             </ListItemButton>

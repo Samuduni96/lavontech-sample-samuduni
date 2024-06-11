@@ -1,32 +1,42 @@
-import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
+import React, { useState, useContext } from "react";
+import { styled, alpha, useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import InputBase from "@mui/material/InputBase";
-import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import Avatar from "@mui/material/Avatar";
 import SideDrawer from "./SideDrawer";
-import { useState } from "react";
+import { ColorModeContext } from "../App";
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
+
+interface HeaderProps {
+  toggleDrawer: () => void;
+  drawerOpen: boolean;
+}
 
 const drawerWidth = 250;
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor:
+    theme.palette.mode === "dark"
+      ? alpha(theme.palette.common.white, 0.15)
+      : alpha(theme.palette.grey[700], 0.15),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor:
+      theme.palette.mode === "dark"
+        ? alpha(theme.palette.common.white, 0.25)
+        : alpha(theme.palette.grey[700], 0.25),
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
@@ -48,7 +58,6 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
@@ -60,11 +69,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Header() {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+export const Header: React.FC<HeaderProps> = ({ toggleDrawer, drawerOpen }) => {
+  const theme = useTheme();
+  const colorMode = useContext(ColorModeContext);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
-    React.useState<null | HTMLElement>(null);
-  const [drawerOpen, setDrawerOpen] = useState(true);
+    useState<null | HTMLElement>(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -84,10 +94,6 @@ export default function Header() {
 
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
-  };
-
-  const toggleDrawer = () => {
-    setDrawerOpen(!drawerOpen);
   };
 
   const menuId = "primary-search-account-menu";
@@ -129,26 +135,6 @@ export default function Header() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-       
-            <NotificationsIcon />
-   
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -169,7 +155,7 @@ export default function Header() {
       <AppBar
         position="static"
         sx={{
-          backgroundColor: "#191f45",
+          backgroundColor: "background.default",
           width: drawerOpen ? `calc(100% - ${drawerWidth}px)` : "100%",
           ml: drawerOpen ? `${drawerWidth}px` : 0,
           transition: "width 0.3s, margin-left 0.3s",
@@ -180,7 +166,6 @@ export default function Header() {
             onClick={toggleDrawer}
             size="large"
             aria-label="show 4 new mails"
-            color="inherit"
           >
             <MenuOutlinedIcon />
           </IconButton>
@@ -190,7 +175,6 @@ export default function Header() {
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
@@ -202,16 +186,18 @@ export default function Header() {
             }}
           >
             <IconButton
-              size="large"
-              aria-label="show 4 new mails"
-              color="inherit"
+              sx={{ ml: 1 }}
+              onClick={colorMode.toggleColorMode}
             >
-              <MailIcon />
+              {theme.palette.mode === "dark" ? (
+                <DarkModeOutlinedIcon />
+              ) : (
+                <LightModeOutlinedIcon />
+              )}
             </IconButton>
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
-              color="inherit"
             >
               <SettingsOutlinedIcon />
             </IconButton>
@@ -240,4 +226,4 @@ export default function Header() {
       {renderMenu}
     </Box>
   );
-}
+};
