@@ -80,7 +80,7 @@ export default function SideDrawer({ toggleDrawer, open }: SideDrawerProps) {
       variant="persistent"
     >
       <Box
-        className="bg-[#21295c] light:bg-white flex-col"
+        className="flex-col"
         role="presentation"
         display="flex"
         sx={{ bgcolor: "primary.main", color: "text.primary" }}
